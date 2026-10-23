@@ -11,8 +11,27 @@
             "ended_at": null,
             "elapsed_ms": null,
             "repository_commit": "869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf",
-            "working_tree_dirty": false,
-            "acceptance_criteria": [],
+            "working_tree_dirty": true,
+            "acceptance_criteria": [
+                "EVT-001",
+                "EVT-002",
+                "EVT-003",
+                "EVT-004",
+                "REG-001",
+                "REG-002",
+                "REG-003",
+                "REG-004",
+                "REG-005",
+                "REG-006",
+                "ADM-001",
+                "ADM-002",
+                "ADM-003",
+                "ADM-004",
+                "ADM-005",
+                "QUA-001",
+                "QUA-002",
+                "QUA-003"
+            ],
             "child_run_ids": [],
             "agents": [
                 {
@@ -94,10 +113,378 @@
                     "redactions": [
                         "Full conversation history was not stored; only the minimum human approval evidence was retained."
                     ]
+                },
+                {
+                    "agent": "system-orchestrator-g1-planning",
+                    "role": "System Orchestrator",
+                    "model": null,
+                    "charter_sha256": "d3426694f2069cde1274eaf19a453de17ba37fa857ab8b113a44df6c6a662628",
+                    "status": "completed",
+                    "started_at": "2026-10-23T09:54:40Z",
+                    "ended_at": "2026-10-23T10:08:21Z",
+                    "elapsed_ms": 821000,
+                    "acceptance_criteria": [
+                        "EVT-001",
+                        "EVT-002",
+                        "EVT-003",
+                        "EVT-004",
+                        "REG-001",
+                        "REG-002",
+                        "REG-003",
+                        "REG-004",
+                        "REG-005",
+                        "REG-006",
+                        "ADM-001",
+                        "ADM-002",
+                        "ADM-003",
+                        "ADM-004",
+                        "ADM-005",
+                        "QUA-001",
+                        "QUA-002",
+                        "QUA-003"
+                    ],
+                    "prompt_summary": "Prepare the real G1 planning package for the approved events vertical slice, coordinate the Architect within role ownership, update governance trace/checkpoints, and stop before implementation or human approval.",
+                    "input_artifacts": [
+                        {
+                            "path": "EVENT_SPEC.md",
+                            "sha256": "652f7384d499839875d6457b6551194b200d023d61c1c9cae45fc79207f9647b"
+                        },
+                        {
+                            "path": "AGENTS.md",
+                            "sha256": "db9b172e655375a0dcbd52acab49b5c0b8ea52d89b89338a5d144c8f799a6c2f"
+                        },
+                        {
+                            "path": "HUMAN_GATES_AND_GUARDRAILS.md",
+                            "sha256": "b6275844677850fa9262280806a992ec3e155a92b1b22e49d599a2ee7a6a124e"
+                        },
+                        {
+                            "path": "WORKFLOW_DESIGN.md",
+                            "sha256": "9c64a7c0ac7b8212d1e84e1a45bda0474fb8d25ec785819e939ea985f010f8d6"
+                        },
+                        {
+                            "path": "WORKFLOW_DIAGRAM.md",
+                            "sha256": "61ccff7009106418f2ccf410fdff1d944d3ce352073c01e8a9c123fb9f244166"
+                        },
+                        {
+                            "path": "artifacts/README.md",
+                            "sha256": "8a6618f2dbeca502ac49ddab18b4e594949d46b46cf01e17ad84a0edd836f824"
+                        },
+                        {
+                            "path": "artifacts/DECISION_LOG.md",
+                            "sha256": "36ae2b5062ea7f10cca32d00337af3cb98fb873530ac3ccfd4eec34bb5f319a2"
+                        }
+                    ],
+                    "output_artifacts": [
+                        {
+                            "path": "artifacts/WORK_PLAN.md",
+                            "sha256": "3696339d9029ca5de20198b4bd50826091cddcc5e74365f2aaf44a26f5a57e9a"
+                        },
+                        {
+                            "path": "artifacts/DECISION_LOG.md",
+                            "sha256": "df2a324a7bd42a637b60924d815c664e3ec98c37dba3681a1e504aa134d6f61a"
+                        },
+                        {
+                            "path": "artifacts/checkpoints/events-vslice-20261023-001/orchestrator.md",
+                            "sha256": "c3356bcab4b971f1f839e2ae0d7fa1e657b8d641740ac3c6f22fc16e9215b068"
+                        },
+                        {
+                            "path": "RUN_TRACE.json",
+                            "sha256": null
+                        }
+                    ],
+                    "decisions": [
+                        "Mapped all 18 acceptance criteria to accountable work packages and independent evidence, with Backend and Frontend parallelism limited by the generated Wayfinder seam.",
+                        "Accepted the Architect design for UTC persistence, explicit Inertia contracts, restrictive event deletion, database-backed normalized-email uniqueness, targeted race conversion, and one-time post/redirect/get confirmation.",
+                        "Expanded the future Backend write scope only for config/database.php database-exception binding masking; broader configuration changes remain G2-controlled.",
+                        "Recorded G1 as pending and blocked implementation; no human approval, merge authority, or deployment authority was inferred."
+                    ],
+                    "tool_calls": [
+                        {
+                            "tool": "exec_command",
+                            "action_summary": "Inspected repository state, governing artifacts, installed package versions, routes, configuration, source conventions, tests, and installed Laravel exception behavior read-only.",
+                            "status": "succeeded",
+                            "started_at": "2026-10-23T09:54:40Z",
+                            "ended_at": "2026-10-23T10:05:33Z"
+                        },
+                        {
+                            "tool": "web primary-documentation search",
+                            "action_summary": "Consulted version-current Laravel 13 and Inertia v3 primary documentation because the Laravel Boost search-docs MCP tool was unavailable.",
+                            "status": "succeeded",
+                            "started_at": null,
+                            "ended_at": null
+                        },
+                        {
+                            "tool": "multi-agent delegation",
+                            "action_summary": "Assigned and accepted the bounded Solutions Architect handoff under sole-writer rules, then requested one checkpoint hash reconciliation after the work-plan privacy scope update.",
+                            "status": "succeeded",
+                            "started_at": "2026-10-23T09:54:40Z",
+                            "ended_at": "2026-10-23T10:05:33Z"
+                        },
+                        {
+                            "tool": "apply_patch",
+                            "action_summary": "Created the work plan and Orchestrator checkpoint and updated the decision log and run trace without modifying application or configuration files.",
+                            "status": "succeeded",
+                            "started_at": null,
+                            "ended_at": "2026-10-23T10:08:21Z"
+                        },
+                        {
+                            "tool": "jq and git diff validation",
+                            "action_summary": "Validated JSON parsing, schema-derived required/property/enum constraints, acceptance counts, and whitespace integrity; a full third-party JSON Schema validator was unavailable and no such result was claimed.",
+                            "status": "succeeded",
+                            "started_at": null,
+                            "ended_at": "2026-10-23T10:08:21Z"
+                        },
+                        {
+                            "tool": "exec_command",
+                            "action_summary": "Initial exploratory jq query used the wrong JSON Schema path and returned an error; no file was changed.",
+                            "status": "failed",
+                            "started_at": null,
+                            "ended_at": null
+                        }
+                    ],
+                    "errors": [
+                        {
+                            "class": "implementation",
+                            "summary": "A read-only exploratory jq query addressed run properties inline instead of through RUN_TRACE.schema.json $defs.",
+                            "resolution": "Read the schema through $defs on the next inspection; no artifact or task outcome was affected."
+                        }
+                    ],
+                    "retry_count": 0,
+                    "remediation_cycles": 0,
+                    "usage": {
+                        "input_tokens": null,
+                        "output_tokens": null,
+                        "cached_tokens": null,
+                        "total_tokens": null,
+                        "cost": {
+                            "amount": null,
+                            "currency": null,
+                            "source": null,
+                            "unavailable_reason": "The execution environment did not expose billing cost for this agent execution."
+                        },
+                        "unavailable_reason": "The execution environment did not expose token usage for this agent execution. Timing before the first captured planning timestamp was not estimated."
+                    },
+                    "redactions": [
+                        "The full delegated prompt and raw tool outputs were not copied into the trace; only bounded summaries and artifact references were retained.",
+                        "No secrets, populated environment values, or attendee data were inspected or stored."
+                    ]
+                },
+                {
+                    "agent": "solutions-architect",
+                    "role": "Solutions Architect",
+                    "model": null,
+                    "charter_sha256": "c1aff800b164aa2d2247d389d366993299adeb95b659ef4fda071ce41198e9bf",
+                    "status": "completed",
+                    "started_at": "2026-10-23T09:54:40Z",
+                    "ended_at": "2026-10-23T10:05:33Z",
+                    "elapsed_ms": 653000,
+                    "acceptance_criteria": [
+                        "EVT-001",
+                        "EVT-002",
+                        "EVT-003",
+                        "EVT-004",
+                        "REG-001",
+                        "REG-002",
+                        "REG-003",
+                        "REG-004",
+                        "REG-005",
+                        "REG-006",
+                        "ADM-001",
+                        "ADM-002",
+                        "ADM-003",
+                        "ADM-004",
+                        "ADM-005",
+                        "QUA-001",
+                        "QUA-002",
+                        "QUA-003"
+                    ],
+                    "prompt_summary": "Produce the Architect-owned G1 contract and recoverable checkpoint for the approved thin slice, without changing implementation, configuration, governance, trace, dependencies, merge state, or deployment state.",
+                    "input_artifacts": [
+                        {
+                            "path": "EVENT_SPEC.md",
+                            "sha256": "652f7384d499839875d6457b6551194b200d023d61c1c9cae45fc79207f9647b"
+                        },
+                        {
+                            "path": "AGENTS.md",
+                            "sha256": "db9b172e655375a0dcbd52acab49b5c0b8ea52d89b89338a5d144c8f799a6c2f"
+                        },
+                        {
+                            "path": "HUMAN_GATES_AND_GUARDRAILS.md",
+                            "sha256": "b6275844677850fa9262280806a992ec3e155a92b1b22e49d599a2ee7a6a124e"
+                        },
+                        {
+                            "path": "WORKFLOW_DESIGN.md",
+                            "sha256": "9c64a7c0ac7b8212d1e84e1a45bda0474fb8d25ec785819e939ea985f010f8d6"
+                        },
+                        {
+                            "path": "WORKFLOW_DIAGRAM.md",
+                            "sha256": "61ccff7009106418f2ccf410fdff1d944d3ce352073c01e8a9c123fb9f244166"
+                        },
+                        {
+                            "path": "artifacts/README.md",
+                            "sha256": "8a6618f2dbeca502ac49ddab18b4e594949d46b46cf01e17ad84a0edd836f824"
+                        },
+                        {
+                            "path": "artifacts/WORK_PLAN.md",
+                            "sha256": "3696339d9029ca5de20198b4bd50826091cddcc5e74365f2aaf44a26f5a57e9a"
+                        }
+                    ],
+                    "output_artifacts": [
+                        {
+                            "path": "artifacts/ARCH_SPEC.md",
+                            "sha256": "bbcfaf89cd4feb845d091bb479e587463975d8b006fb49ea7c981a1cf6a807b3"
+                        },
+                        {
+                            "path": "artifacts/checkpoints/events-vslice-20261023-001/architect.md",
+                            "sha256": "374cfb79f391275a888f111e41bf3aa5fbe30d52a41074a6a2d0905692207218"
+                        }
+                    ],
+                    "decisions": [
+                        "Defined a minimal two-model schema with named ordering and uniqueness indexes and restrictive event deletion.",
+                        "Defined explicit public/admin routes, controller and Form Request boundaries, six exact Inertia page prop contracts, generated Wayfinder ownership, and one guest-safe layout.",
+                        "Defined UTC-at-rest and UTC-wire behavior with configured-timezone input/rendering, plus explicit PII serialization, logging, and database-exception masking boundaries.",
+                        "Declared the unauthenticated-admin exposure and SQLite genuine-concurrency test limitation as residual risks requiring explicit G1 acceptance."
+                    ],
+                    "tool_calls": [
+                        {
+                            "tool": "exec_command and primary documentation inspection",
+                            "action_summary": "Inspected governance, repository conventions, packages, routes, configuration, installed framework behavior, and version-scoped documentation read-only.",
+                            "status": "succeeded",
+                            "started_at": "2026-10-23T09:54:40Z",
+                            "ended_at": "2026-10-23T10:05:33Z"
+                        },
+                        {
+                            "tool": "apply_patch",
+                            "action_summary": "Created only the Architect-owned architecture specification and checkpoint, then reconciled the checkpoint hash after the Orchestrator's bounded work-plan update.",
+                            "status": "succeeded",
+                            "started_at": null,
+                            "ended_at": "2026-10-23T10:05:33Z"
+                        }
+                    ],
+                    "errors": [],
+                    "retry_count": 0,
+                    "remediation_cycles": 0,
+                    "usage": {
+                        "input_tokens": null,
+                        "output_tokens": null,
+                        "cached_tokens": null,
+                        "total_tokens": null,
+                        "cost": {
+                            "amount": null,
+                            "currency": null,
+                            "source": null,
+                            "unavailable_reason": "The execution environment did not expose billing cost for this specialist execution."
+                        },
+                        "unavailable_reason": "The execution environment did not expose token usage for this specialist execution."
+                    },
+                    "redactions": [
+                        "The full assignment and raw inspection outputs were not copied into the trace; only the minimum activity summaries and artifact hashes were retained.",
+                        "No secrets, populated environment values, or attendee data were inspected or stored."
+                    ]
+                },
+                {
+                    "agent": "system-orchestrator-g1-decision",
+                    "role": "System Orchestrator",
+                    "model": null,
+                    "charter_sha256": "d3426694f2069cde1274eaf19a453de17ba37fa857ab8b113a44df6c6a662628",
+                    "status": "completed",
+                    "started_at": "2026-10-23T10:22:44Z",
+                    "ended_at": "2026-10-23T10:23:54Z",
+                    "elapsed_ms": 70000,
+                    "acceptance_criteria": [
+                        "EVT-001",
+                        "EVT-002",
+                        "EVT-003",
+                        "EVT-004",
+                        "REG-001",
+                        "REG-002",
+                        "REG-003",
+                        "REG-004",
+                        "REG-005",
+                        "REG-006",
+                        "ADM-001",
+                        "ADM-002",
+                        "ADM-003",
+                        "ADM-004",
+                        "ADM-005",
+                        "QUA-001",
+                        "QUA-002",
+                        "QUA-003"
+                    ],
+                    "prompt_summary": "Record Erickson Salangsang's explicit G1 approval exactly as given, release only the approved implementation and verification packages, and preserve the separate G2, G3, and G4 boundaries.",
+                    "input_artifacts": [
+                        {
+                            "path": "artifacts/WORK_PLAN.md",
+                            "sha256": "3696339d9029ca5de20198b4bd50826091cddcc5e74365f2aaf44a26f5a57e9a"
+                        },
+                        {
+                            "path": "artifacts/ARCH_SPEC.md",
+                            "sha256": "bbcfaf89cd4feb845d091bb479e587463975d8b006fb49ea7c981a1cf6a807b3"
+                        },
+                        {
+                            "path": "artifacts/DECISION_LOG.md",
+                            "sha256": "df2a324a7bd42a637b60924d815c664e3ec98c37dba3681a1e504aa134d6f61a"
+                        },
+                        {
+                            "path": "artifacts/checkpoints/events-vslice-20261023-001/orchestrator.md",
+                            "sha256": "c3356bcab4b971f1f839e2ae0d7fa1e657b8d641740ac3c6f22fc16e9215b068"
+                        }
+                    ],
+                    "output_artifacts": [
+                        {
+                            "path": "artifacts/DECISION_LOG.md",
+                            "sha256": "20c9aaeb1120da344b1c87a686b771087b03fc9722adb9c512ce913a487b3dc5"
+                        },
+                        {
+                            "path": "artifacts/checkpoints/events-vslice-20261023-001/orchestrator.md",
+                            "sha256": "272b5a0989567661d2bf4a401358baa1fcb7e954e8a0a1371563b54c38bec6bd"
+                        },
+                        {
+                            "path": "RUN_TRACE.json",
+                            "sha256": null
+                        }
+                    ],
+                    "decisions": [
+                        "G1 approved as written by Erickson Salangsang on 2026-10-23 for run events-vslice-20261023-001.",
+                        "The documented unauthenticated-admin exposure, SQLite genuine-concurrency test limitation, restrictive deletion and rollback guardrails, and bounded database exception-binding mask were accepted.",
+                        "Only implementation and verification within artifacts/WORK_PLAN.md and artifacts/ARCH_SPEC.md are authorized; material variance requires G2.",
+                        "Merge remains blocked pending G3, and deployment or shared/internet exposure remains blocked pending G4."
+                    ],
+                    "tool_calls": [
+                        {
+                            "tool": "apply_patch",
+                            "action_summary": "Recorded the exact human G1 approval in the decision log, updated the Orchestrator checkpoint to READY, and advanced the run trace without touching application files.",
+                            "status": "succeeded",
+                            "started_at": "2026-10-23T10:22:44Z",
+                            "ended_at": "2026-10-23T10:23:54Z"
+                        }
+                    ],
+                    "errors": [],
+                    "retry_count": 0,
+                    "remediation_cycles": 0,
+                    "usage": {
+                        "input_tokens": null,
+                        "output_tokens": null,
+                        "cached_tokens": null,
+                        "total_tokens": null,
+                        "cost": {
+                            "amount": null,
+                            "currency": null,
+                            "source": null,
+                            "unavailable_reason": "The execution environment did not expose billing cost for this agent execution."
+                        },
+                        "unavailable_reason": "The execution environment did not expose token usage for this agent execution."
+                    },
+                    "redactions": [
+                        "No secrets, populated environment values, or personal attendee data were present in the gate decision.",
+                        "The exact approval sentence is retained in artifacts/DECISION_LOG.md; the trace records its minimum governance meaning."
+                    ]
                 }
             ],
             "gate_decisions": [
-                "G0 approved by Erickson Salangsang on 2026-10-23 for revision 869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf, subject to the conditions and accepted risks in artifacts/DECISION_LOG.md."
+                "G0 approved by Erickson Salangsang on 2026-10-23 for revision 869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf, subject to the conditions and accepted risks in artifacts/DECISION_LOG.md.",
+                "G1 package prepared against base repository commit 39037c4577cd78abe2df0fd5a5cafe7ae0589750; this superseded pending state is retained for trace history.",
+                "G1 approved as written by Erickson Salangsang on 2026-10-23 for run events-vslice-20261023-001. Implementation and verification within the approved contracts are authorized; material variance requires G2, merge requires G3, and deployment requires G4."
             ],
             "usage": {
                 "input_tokens": null,
@@ -112,7 +499,7 @@
                 },
                 "unavailable_reason": "The execution environment did not expose aggregate token usage for this run."
             },
-            "summary": "G0 approval recorded. The governed run is open for Orchestrator planning and Solutions Architect work only; application implementation remains blocked pending G1."
+            "summary": "G1 was approved as written by Erickson Salangsang on 2026-10-23. Bounded implementation and verification may begin under the work plan and architecture; material variance, merge, and deployment remain controlled by G2, G3, and G4 respectively."
         }
     ]
 }
