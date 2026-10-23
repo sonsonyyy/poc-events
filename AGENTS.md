@@ -8,6 +8,7 @@
 This application is a Laravel application running on PHP 8.4. Always use the APIs that match the installed major version of each package — do not assume a version.
 
 Before relying on a package's API, confirm its installed version:
+
 - PHP packages: run `composer show --direct` to list direct dependencies with versions, or `composer show <vendor/package>` for a single package.
 - JS packages: check `package.json` for the installed versions.
 
@@ -78,7 +79,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 - Execute PHP in app context for debugging and testing code. Do not create models without user approval, prefer tests with factories instead. Prefer existing Artisan commands over custom tinker code.
 - Always use single quotes to prevent shell expansion: `php artisan tinker --execute 'Your::code();'`
-  - Double quotes for PHP strings inside: `php artisan tinker --execute 'User::where("active", true)->count();'`
+    - Double quotes for PHP strings inside: `php artisan tinker --execute 'User::where("active", true)->count();'`
 
 === php rules ===
 
@@ -253,14 +254,14 @@ No AI agent or Orchestrator participates in application requests. Registration u
 
 # Agent Roster & Core Responsibilities
 
-| Role | Charter | Core responsibility | Must not own |
-| --- | --- | --- | --- |
-| Human / Project Owner | `HUMAN_GATES_AND_GUARDRAILS.md` | Requirements, risk decisions, acceptance, and deployment. | Routine specialist implementation. |
-| System Orchestrator | `.agents/orchestrator.md` | Work breakdown, sequencing, assignment, traceability, gates, and integrated readiness. | Product decisions, specialist design decisions, or deployment. |
-| Solutions Architect | `.agents/architect.md` | Minimal technical design, contracts, invariants, data/privacy decisions, and architecture risks. | Unapproved requirements or deployment. |
-| Backend Engineer | `.agents/backend.md` | Laravel domain, persistence, validation, routes/controllers, server-side Inertia contract, and focused Pest coverage. | Frontend design, scope changes, or deployment. |
-| Frontend Engineer | `.agents/frontend.md` | Inertia React pages, typed integration, UI states, responsiveness, and accessibility. | Backend contract changes, scope changes, or deployment. |
-| QA / Reviewer | `.agents/test.md` | Independent acceptance traceability, regression/security/accessibility review, and go/no-go recommendation. | Human acceptance, silent remediation, or deployment. |
+| Role                  | Charter                         | Core responsibility                                                                                                   | Must not own                                                   |
+| --------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Human / Project Owner | `HUMAN_GATES_AND_GUARDRAILS.md` | Requirements, risk decisions, acceptance, and deployment.                                                             | Routine specialist implementation.                             |
+| System Orchestrator   | `.agents/orchestrator.md`       | Work breakdown, sequencing, assignment, traceability, gates, and integrated readiness.                                | Product decisions, specialist design decisions, or deployment. |
+| Solutions Architect   | `.agents/architect.md`          | Minimal technical design, contracts, invariants, data/privacy decisions, and architecture risks.                      | Unapproved requirements or deployment.                         |
+| Backend Engineer      | `.agents/backend.md`            | Laravel domain, persistence, validation, routes/controllers, server-side Inertia contract, and focused Pest coverage. | Frontend design, scope changes, or deployment.                 |
+| Frontend Engineer     | `.agents/frontend.md`           | Inertia React pages, typed integration, UI states, responsiveness, and accessibility.                                 | Backend contract changes, scope changes, or deployment.        |
+| QA / Reviewer         | `.agents/test.md`               | Independent acceptance traceability, regression/security/accessibility review, and go/no-go recommendation.           | Human acceptance, silent remediation, or deployment.           |
 
 Every specialist must read this file, its own charter, the current Orchestrator assignment, and all applicable human-owned requirements before acting.
 

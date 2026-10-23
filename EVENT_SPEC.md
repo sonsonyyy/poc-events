@@ -82,27 +82,27 @@ Retention of unrelated starter-kit functionality is permitted, but it is not par
 
 ### Event
 
-| Attribute | Requirement |
-| --- | --- |
-| `id` | Database-generated primary key. |
-| `title` | Required string, trimmed, maximum 255 characters. |
-| `description` | Required text suitable for plain-text rendering. |
-| `location` | Required string, trimmed, maximum 255 characters. |
-| `starts_at` | Required date/time. Admin input is interpreted in the configured application timezone, converted to UTC, and persisted in UTC. |
-| `ends_at` | Required date/time strictly after `starts_at`, converted and persisted using the same timezone rule as `starts_at`. |
-| `created_at`, `updated_at` | Framework-managed timestamps. |
+| Attribute                  | Requirement                                                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                       | Database-generated primary key.                                                                                                |
+| `title`                    | Required string, trimmed, maximum 255 characters.                                                                              |
+| `description`              | Required text suitable for plain-text rendering.                                                                               |
+| `location`                 | Required string, trimmed, maximum 255 characters.                                                                              |
+| `starts_at`                | Required date/time. Admin input is interpreted in the configured application timezone, converted to UTC, and persisted in UTC. |
+| `ends_at`                  | Required date/time strictly after `starts_at`, converted and persisted using the same timezone rule as `starts_at`.            |
+| `created_at`, `updated_at` | Framework-managed timestamps.                                                                                                  |
 
 All created events are publicly visible immediately. No publication-state field is required for this slice.
 
 ### Registration
 
-| Attribute | Requirement |
-| --- | --- |
-| `id` | Database-generated primary key. |
-| `event_id` | Required foreign key to an existing event. Registrations must not exist without an event. |
-| `name` | Required string, trimmed, maximum 255 characters. |
-| `email` | Required valid email address, trimmed and canonicalized to lowercase before persistence, maximum 255 characters. |
-| `created_at`, `updated_at` | Framework-managed timestamps; `created_at` is the registration time displayed to administrators. |
+| Attribute                  | Requirement                                                                                                      |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `id`                       | Database-generated primary key.                                                                                  |
+| `event_id`                 | Required foreign key to an existing event. Registrations must not exist without an event.                        |
+| `name`                     | Required string, trimmed, maximum 255 characters.                                                                |
+| `email`                    | Required valid email address, trimmed and canonicalized to lowercase before persistence, maximum 255 characters. |
+| `created_at`, `updated_at` | Framework-managed timestamps; `created_at` is the registration time displayed to administrators.                 |
 
 The domain uniqueness rule is `(event_id, email)`. It must be enforced by both the request workflow and a composite unique database index. A duplicate attempt returns a user-readable validation error and must not alter the existing registration.
 
@@ -118,23 +118,23 @@ The domain uniqueness rule is `(event_id, email)`. It must be enforced by both t
 
 ## Acceptance Criteria Matrix
 
-| ID | Capability | Acceptance criterion | Verification evidence |
-| --- | --- | --- | --- |
-| EVT-001 | Event listing | Given multiple events, when a visitor opens the public listing, then every event is shown in ascending start-time order with title, time range, location, and a details link. | Pest feature test plus responsive UI review. |
-| EVT-002 | Empty listing | Given no events, when a visitor opens the public listing, then a clear empty state appears without an application error. | Pest feature test. |
-| EVT-003 | Event details | Given an existing event, when a visitor opens its details route, then the title, description, time range, location, and registration form are visible. | Pest feature test plus UI review. |
-| EVT-004 | Missing event | Given an unknown event identifier, when its details route is requested, then the application returns its normal 404 response. | Pest feature test. |
-| REG-001 | Registration form | Given an event details page, when the page renders, then name and email inputs have labels, required state, and an actionable submit control. | UI/accessibility review. |
-| REG-002 | Registration validation | Given missing or invalid registration data, when the form is submitted, then nothing is persisted and field-level errors are displayed with the submitted non-sensitive values preserved. | Pest feature tests plus UI review. |
-| REG-003 | Registration success | Given valid name and email data, when the form is submitted, then one registration is stored for that event and an in-app confirmation identifies the event and attendee. | Pest feature test asserting response and database state. |
-| REG-004 | Duplicate prevention | Given an email already registered for an event, when the same email is submitted again with different casing or surrounding whitespace, then no second row is created and a clear duplicate message is shown. | Pest feature test asserting message and row count. |
-| REG-005 | Cross-event registration | Given an email registered for one event, when it is submitted for another event, then the second registration succeeds. | Pest feature test. |
-| REG-006 | Concurrent safety | Given competing submissions for the same event and normalized email, when persistence is attempted, then the database invariant permits at most one record and the losing request receives a controlled response rather than an unhandled error. | Unique-index inspection and focused automated test where practical. |
-| ADM-001 | Admin access | Given no authenticated session, when `/admin/events` or its create/edit/registrant routes are requested, then the pages are accessible without a login redirect. | Pest feature tests. |
-| ADM-002 | Create event | Given valid event data, when an administrator submits the create form, then one event is stored and success feedback is shown. | Pest feature test asserting response and database state. |
-| ADM-003 | Event validation | Given missing data or an end time not after the start time, when an event form is submitted, then no invalid change is persisted and field-level errors are shown. | Pest feature tests for create and update boundaries. |
-| ADM-004 | Edit event | Given an existing event, when an administrator submits valid changed data, then that event is updated, its registrations are unchanged, and success feedback is shown. | Pest feature test asserting response and database state. |
-| ADM-005 | Registrant view | Given an event with registrations, when its admin registrant view opens, then each attendee's name, email, and registration time are shown in deterministic order; an event with none shows an empty state. | Pest feature tests plus UI review. |
-| QUA-001 | Route integration | Given navigation or form actions in React, then they use Inertia and generated Wayfinder routes/actions rather than duplicated hard-coded route contracts. | Code review and frontend type check. |
-| QUA-002 | Regression quality | Given the completed slice, when focused Pest tests, `npm run check`, `npm run types:check`, and `npm run build` execute, then all commands pass. | Command output recorded in the QA handoff. |
-| QUA-003 | Scope compliance | Given the completed slice, when reviewed against this specification, then no out-of-scope capability or unapproved dependency has been introduced. | QA traceability report and human acceptance. |
+| ID      | Capability               | Acceptance criterion                                                                                                                                                                                                                             | Verification evidence                                               |
+| ------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| EVT-001 | Event listing            | Given multiple events, when a visitor opens the public listing, then every event is shown in ascending start-time order with title, time range, location, and a details link.                                                                    | Pest feature test plus responsive UI review.                        |
+| EVT-002 | Empty listing            | Given no events, when a visitor opens the public listing, then a clear empty state appears without an application error.                                                                                                                         | Pest feature test.                                                  |
+| EVT-003 | Event details            | Given an existing event, when a visitor opens its details route, then the title, description, time range, location, and registration form are visible.                                                                                           | Pest feature test plus UI review.                                   |
+| EVT-004 | Missing event            | Given an unknown event identifier, when its details route is requested, then the application returns its normal 404 response.                                                                                                                    | Pest feature test.                                                  |
+| REG-001 | Registration form        | Given an event details page, when the page renders, then name and email inputs have labels, required state, and an actionable submit control.                                                                                                    | UI/accessibility review.                                            |
+| REG-002 | Registration validation  | Given missing or invalid registration data, when the form is submitted, then nothing is persisted and field-level errors are displayed with the submitted non-sensitive values preserved.                                                        | Pest feature tests plus UI review.                                  |
+| REG-003 | Registration success     | Given valid name and email data, when the form is submitted, then one registration is stored for that event and an in-app confirmation identifies the event and attendee.                                                                        | Pest feature test asserting response and database state.            |
+| REG-004 | Duplicate prevention     | Given an email already registered for an event, when the same email is submitted again with different casing or surrounding whitespace, then no second row is created and a clear duplicate message is shown.                                    | Pest feature test asserting message and row count.                  |
+| REG-005 | Cross-event registration | Given an email registered for one event, when it is submitted for another event, then the second registration succeeds.                                                                                                                          | Pest feature test.                                                  |
+| REG-006 | Concurrent safety        | Given competing submissions for the same event and normalized email, when persistence is attempted, then the database invariant permits at most one record and the losing request receives a controlled response rather than an unhandled error. | Unique-index inspection and focused automated test where practical. |
+| ADM-001 | Admin access             | Given no authenticated session, when `/admin/events` or its create/edit/registrant routes are requested, then the pages are accessible without a login redirect.                                                                                 | Pest feature tests.                                                 |
+| ADM-002 | Create event             | Given valid event data, when an administrator submits the create form, then one event is stored and success feedback is shown.                                                                                                                   | Pest feature test asserting response and database state.            |
+| ADM-003 | Event validation         | Given missing data or an end time not after the start time, when an event form is submitted, then no invalid change is persisted and field-level errors are shown.                                                                               | Pest feature tests for create and update boundaries.                |
+| ADM-004 | Edit event               | Given an existing event, when an administrator submits valid changed data, then that event is updated, its registrations are unchanged, and success feedback is shown.                                                                           | Pest feature test asserting response and database state.            |
+| ADM-005 | Registrant view          | Given an event with registrations, when its admin registrant view opens, then each attendee's name, email, and registration time are shown in deterministic order; an event with none shows an empty state.                                      | Pest feature tests plus UI review.                                  |
+| QUA-001 | Route integration        | Given navigation or form actions in React, then they use Inertia and generated Wayfinder routes/actions rather than duplicated hard-coded route contracts.                                                                                       | Code review and frontend type check.                                |
+| QUA-002 | Regression quality       | Given the completed slice, when focused Pest tests, `npm run check`, `npm run types:check`, and `npm run build` execute, then all commands pass.                                                                                                 | Command output recorded in the QA handoff.                          |
+| QUA-003 | Scope compliance         | Given the completed slice, when reviewed against this specification, then no out-of-scope capability or unapproved dependency has been introduced.                                                                                               | QA traceability report and human acceptance.                        |
