@@ -1,0 +1,5 @@
+{
+    "$schema": "./RUN_TRACE.schema.json",
+    "schema_version": "1.0.0",
+    "runs": []
+}
