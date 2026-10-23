@@ -72,17 +72,17 @@ G1 approval does not authorize merge or deployment. Shared/internet deployment s
 
 ## Input and output SHA-256 hashes
 
-| Artifact | SHA-256 |
-| --- | --- |
-| `EVENT_SPEC.md` | `652f7384d499839875d6457b6551194b200d023d61c1c9cae45fc79207f9647b` |
-| `AGENTS.md` | `db9b172e655375a0dcbd52acab49b5c0b8ea52d89b89338a5d144c8f799a6c2f` |
+| Artifact                        | SHA-256                                                            |
+| ------------------------------- | ------------------------------------------------------------------ |
+| `EVENT_SPEC.md`                 | `652f7384d499839875d6457b6551194b200d023d61c1c9cae45fc79207f9647b` |
+| `AGENTS.md`                     | `db9b172e655375a0dcbd52acab49b5c0b8ea52d89b89338a5d144c8f799a6c2f` |
 | `HUMAN_GATES_AND_GUARDRAILS.md` | `b6275844677850fa9262280806a992ec3e155a92b1b22e49d599a2ee7a6a124e` |
-| `WORKFLOW_DESIGN.md` | `9c64a7c0ac7b8212d1e84e1a45bda0474fb8d25ec785819e939ea985f010f8d6` |
-| `WORKFLOW_DIAGRAM.md` | `61ccff7009106418f2ccf410fdff1d944d3ce352073c01e8a9c123fb9f244166` |
-| `artifacts/README.md` | `8a6618f2dbeca502ac49ddab18b4e594949d46b46cf01e17ad84a0edd836f824` |
-| `.agents/architect.md` | `c1aff800b164aa2d2247d389d366993299adeb95b659ef4fda071ce41198e9bf` |
-| `artifacts/WORK_PLAN.md` | `3696339d9029ca5de20198b4bd50826091cddcc5e74365f2aaf44a26f5a57e9a` |
-| `artifacts/ARCH_SPEC.md` | `bbcfaf89cd4feb845d091bb479e587463975d8b006fb49ea7c981a1cf6a807b3` |
+| `WORKFLOW_DESIGN.md`            | `9c64a7c0ac7b8212d1e84e1a45bda0474fb8d25ec785819e939ea985f010f8d6` |
+| `WORKFLOW_DIAGRAM.md`           | `61ccff7009106418f2ccf410fdff1d944d3ce352073c01e8a9c123fb9f244166` |
+| `artifacts/README.md`           | `8a6618f2dbeca502ac49ddab18b4e594949d46b46cf01e17ad84a0edd836f824` |
+| `.agents/architect.md`          | `c1aff800b164aa2d2247d389d366993299adeb95b659ef4fda071ce41198e9bf` |
+| `artifacts/WORK_PLAN.md`        | `3696339d9029ca5de20198b4bd50826091cddcc5e74365f2aaf44a26f5a57e9a` |
+| `artifacts/ARCH_SPEC.md`        | `bbcfaf89cd4feb845d091bb479e587463975d8b006fb49ea7c981a1cf6a807b3` |
 
 The checkpoint does not embed its own hash because that would be self-referential; the Orchestrator may hash it after handoff.
 

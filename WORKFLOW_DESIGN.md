@@ -23,13 +23,13 @@ An agent must escalate a material conflict rather than silently choose one sourc
 
 Each role's detailed permissions are defined in its charter. The summary below is binding:
 
-| Role | Primary tools | Owned writes | Prohibited without human approval |
-| --- | --- | --- | --- |
-| System Orchestrator | Repository inspection, Git read operations, task delegation, documentation lookup, artifact validation | `RUN_TRACE.json`, `artifacts/WORK_PLAN.md`, `artifacts/DECISION_LOG.md`, `artifacts/ACCEPTANCE_TRACEABILITY.md`, `artifacts/DEPLOYMENT_HANDOFF.md`, Orchestrator checkpoint | Application implementation, merge, deployment, destructive commands |
-| Solutions Architect | Repository/package inspection, version-scoped documentation search, read-only schema/route inspection | `artifacts/ARCH_SPEC.md`, Architect checkpoint | Application implementation, dependencies, merge, deployment |
-| Backend Engineer | Laravel Boost read tools, Artisan generators, tests, Pint, static analysis, Git diff/status | Approved backend/database/route/test paths, generated Wayfinder files, `artifacts/BACKEND_HANDOFF.md`, Backend checkpoint | Frontend product UI, dependency changes, destructive database actions, merge, deployment |
-| Frontend Engineer | Inertia/React/Tailwind guidance, frontend checks, type checking, build, browser/log inspection | Approved `resources/js/**` and style paths, `artifacts/FRONTEND_HANDOFF.md`, Frontend checkpoint | Backend contracts, dependency changes, merge, deployment |
-| QA / Reviewer | Read-only inspection, test/static/build commands, browser checks, Git diff/status | `artifacts/QA_REPORT.md`, QA checkpoint; tests only when separately assigned | Silent implementation fixes, weakened tests, merge, deployment |
+| Role                | Primary tools                                                                                          | Owned writes                                                                                                                                                                | Prohibited without human approval                                                        |
+| ------------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| System Orchestrator | Repository inspection, Git read operations, task delegation, documentation lookup, artifact validation | `RUN_TRACE.json`, `artifacts/WORK_PLAN.md`, `artifacts/DECISION_LOG.md`, `artifacts/ACCEPTANCE_TRACEABILITY.md`, `artifacts/DEPLOYMENT_HANDOFF.md`, Orchestrator checkpoint | Application implementation, merge, deployment, destructive commands                      |
+| Solutions Architect | Repository/package inspection, version-scoped documentation search, read-only schema/route inspection  | `artifacts/ARCH_SPEC.md`, Architect checkpoint                                                                                                                              | Application implementation, dependencies, merge, deployment                              |
+| Backend Engineer    | Laravel Boost read tools, Artisan generators, tests, Pint, static analysis, Git diff/status            | Approved backend/database/route/test paths, generated Wayfinder files, `artifacts/BACKEND_HANDOFF.md`, Backend checkpoint                                                   | Frontend product UI, dependency changes, destructive database actions, merge, deployment |
+| Frontend Engineer   | Inertia/React/Tailwind guidance, frontend checks, type checking, build, browser/log inspection         | Approved `resources/js/**` and style paths, `artifacts/FRONTEND_HANDOFF.md`, Frontend checkpoint                                                                            | Backend contracts, dependency changes, merge, deployment                                 |
+| QA / Reviewer       | Read-only inspection, test/static/build commands, browser checks, Git diff/status                      | `artifacts/QA_REPORT.md`, QA checkpoint; tests only when separately assigned                                                                                                | Silent implementation fixes, weakened tests, merge, deployment                           |
 
 All tools operate with least privilege. A role may read the repository and governing artifacts as needed, but may write only its owned paths and paths explicitly included in the Orchestrator assignment. Permission to inspect is not permission to mutate.
 
@@ -37,18 +37,18 @@ All tools operate with least privilege. A role may read the repository and gover
 
 Conversation is transport, not the source of truth. Every substantive assignment, decision, handoff, verification result, and approval must be written to a repository artifact.
 
-| Artifact | Owner | Required contents |
-| --- | --- | --- |
-| `artifacts/WORK_PLAN.md` | Orchestrator | Work packages, dependencies, parallelization plan, assigned role, acceptance IDs, gates |
-| `artifacts/ARCH_SPEC.md` | Architect | Domain/schema design, route and prop contracts, validation, risks, decisions, acceptance mapping |
-| `artifacts/BACKEND_HANDOFF.md` | Backend | Files changed, schema/API behavior, tests/checks, decisions, risks, acceptance IDs |
-| `artifacts/FRONTEND_HANDOFF.md` | Frontend | Files changed, UI states, contract use, accessibility evidence, checks/build, acceptance IDs |
-| `artifacts/QA_REPORT.md` | QA | Criterion results, findings, reproductions, commands, evidence, go/no-go recommendation |
-| `artifacts/ACCEPTANCE_TRACEABILITY.md` | Orchestrator | One final status and evidence link for every acceptance criterion |
-| `artifacts/DECISION_LOG.md` | Orchestrator | Human gates, material decisions, superseded decisions, owner, date, rationale |
-| `artifacts/DEPLOYMENT_HANDOFF.md` | Orchestrator | Accepted commit/PR, release contents, migrations, rollback and post-deploy checks |
-| `artifacts/checkpoints/<run-id>/<agent>.md` | Named agent | Recoverable working state before pause, interruption, compaction, or handoff |
-| `RUN_TRACE.json` | Orchestrator only | Structured per-run and per-agent activity, timing, usage, cost, errors, and outputs |
+| Artifact                                    | Owner             | Required contents                                                                                |
+| ------------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------ |
+| `artifacts/WORK_PLAN.md`                    | Orchestrator      | Work packages, dependencies, parallelization plan, assigned role, acceptance IDs, gates          |
+| `artifacts/ARCH_SPEC.md`                    | Architect         | Domain/schema design, route and prop contracts, validation, risks, decisions, acceptance mapping |
+| `artifacts/BACKEND_HANDOFF.md`              | Backend           | Files changed, schema/API behavior, tests/checks, decisions, risks, acceptance IDs               |
+| `artifacts/FRONTEND_HANDOFF.md`             | Frontend          | Files changed, UI states, contract use, accessibility evidence, checks/build, acceptance IDs     |
+| `artifacts/QA_REPORT.md`                    | QA                | Criterion results, findings, reproductions, commands, evidence, go/no-go recommendation          |
+| `artifacts/ACCEPTANCE_TRACEABILITY.md`      | Orchestrator      | One final status and evidence link for every acceptance criterion                                |
+| `artifacts/DECISION_LOG.md`                 | Orchestrator      | Human gates, material decisions, superseded decisions, owner, date, rationale                    |
+| `artifacts/DEPLOYMENT_HANDOFF.md`           | Orchestrator      | Accepted commit/PR, release contents, migrations, rollback and post-deploy checks                |
+| `artifacts/checkpoints/<run-id>/<agent>.md` | Named agent       | Recoverable working state before pause, interruption, compaction, or handoff                     |
+| `RUN_TRACE.json`                            | Orchestrator only | Structured per-run and per-agent activity, timing, usage, cost, errors, and outputs              |
 
 Artifact files are created when their producing phase starts and updated by their sole owner. Parallel agents must never write the same artifact. Git history supplies prior versions; the current file is the canonical state for the active run.
 
@@ -107,13 +107,13 @@ Every handoff includes the run ID, repository commit or working-tree identifier,
 
 Errors are classified before retry:
 
-| Error class | Action |
-| --- | --- |
-| Transient tool/environment failure | Retry once when safe, then record and escalate if still failing. |
-| Implementation or test failure | Route to the accountable specialist with evidence and affected acceptance IDs. |
-| Contract or requirement conflict | Stop affected work and invoke G2 or another applicable human gate. |
-| Permission, destructive-action, privacy, or security boundary | Do not retry; stop and request human approval. |
-| Agent interruption or context exhaustion | Persist a checkpoint, record the interruption, and resume or reassign from artifacts. |
+| Error class                                                   | Action                                                                                |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Transient tool/environment failure                            | Retry once when safe, then record and escalate if still failing.                      |
+| Implementation or test failure                                | Route to the accountable specialist with evidence and affected acceptance IDs.        |
+| Contract or requirement conflict                              | Stop affected work and invoke G2 or another applicable human gate.                    |
+| Permission, destructive-action, privacy, or security boundary | Do not retry; stop and request human approval.                                        |
+| Agent interruption or context exhaustion                      | Persist a checkpoint, record the interruption, and resume or reassign from artifacts. |
 
 A criterion may go through at most two remediation cycles after its initial failure. A third recurrence of the same underlying failure, or two fixes that create new regressions, requires human escalation. The Orchestrator records each cycle and may not reset the count by rewording the same defect.
 

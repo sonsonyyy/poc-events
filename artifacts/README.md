@@ -4,17 +4,17 @@ This directory contains the persistent outputs of real multi-agent runs. Convers
 
 ## Canonical artifacts and owners
 
-| File | Sole writer |
-| --- | --- |
-| `WORK_PLAN.md` | System Orchestrator |
-| `ARCH_SPEC.md` | Solutions Architect |
-| `BACKEND_HANDOFF.md` | Backend Engineer |
-| `FRONTEND_HANDOFF.md` | Frontend Engineer |
-| `QA_REPORT.md` | QA / Reviewer |
-| `ACCEPTANCE_TRACEABILITY.md` | System Orchestrator |
-| `DECISION_LOG.md` | System Orchestrator |
-| `DEPLOYMENT_HANDOFF.md` | System Orchestrator |
-| `checkpoints/<run-id>/<agent>.md` | Named agent |
+| File                              | Sole writer         |
+| --------------------------------- | ------------------- |
+| `WORK_PLAN.md`                    | System Orchestrator |
+| `ARCH_SPEC.md`                    | Solutions Architect |
+| `BACKEND_HANDOFF.md`              | Backend Engineer    |
+| `FRONTEND_HANDOFF.md`             | Frontend Engineer   |
+| `QA_REPORT.md`                    | QA / Reviewer       |
+| `ACCEPTANCE_TRACEABILITY.md`      | System Orchestrator |
+| `DECISION_LOG.md`                 | System Orchestrator |
+| `DEPLOYMENT_HANDOFF.md`           | System Orchestrator |
+| `checkpoints/<run-id>/<agent>.md` | Named agent         |
 
 Files representing work results must be created from evidence during a real run. Do not commit fabricated or pre-approved placeholder results.
 

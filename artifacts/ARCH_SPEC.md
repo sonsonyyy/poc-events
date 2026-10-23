@@ -46,15 +46,15 @@ flowchart LR
 
 ### `events`
 
-| Column | Database definition | Application contract |
-| --- | --- | --- |
-| `id` | database-generated big integer primary key | Public route-model key and deterministic ordering tie-breaker. |
-| `title` | `varchar(255)`, not null | Trimmed, required. |
-| `description` | `text`, not null | Trimmed, required, rendered as plain text. |
-| `location` | `varchar(255)`, not null | Trimmed, required. |
-| `starts_at` | `datetime`, not null | Offset-free database value representing UTC. |
-| `ends_at` | `datetime`, not null | Offset-free database value representing UTC and strictly later than `starts_at`. |
-| `created_at`, `updated_at` | framework timestamps | Framework-managed. |
+| Column                     | Database definition                        | Application contract                                                             |
+| -------------------------- | ------------------------------------------ | -------------------------------------------------------------------------------- |
+| `id`                       | database-generated big integer primary key | Public route-model key and deterministic ordering tie-breaker.                   |
+| `title`                    | `varchar(255)`, not null                   | Trimmed, required.                                                               |
+| `description`              | `text`, not null                           | Trimmed, required, rendered as plain text.                                       |
+| `location`                 | `varchar(255)`, not null                   | Trimmed, required.                                                               |
+| `starts_at`                | `datetime`, not null                       | Offset-free database value representing UTC.                                     |
+| `ends_at`                  | `datetime`, not null                       | Offset-free database value representing UTC and strictly later than `starts_at`. |
+| `created_at`, `updated_at` | framework timestamps                       | Framework-managed.                                                               |
 
 Indexes:
 
@@ -65,13 +65,13 @@ The `Event` model uses `HasFactory`, precise `hasMany(Registration::class)` typi
 
 ### `registrations`
 
-| Column | Database definition | Application contract |
-| --- | --- | --- |
-| `id` | database-generated big integer primary key | Deterministic ordering tie-breaker. |
-| `event_id` | unsigned big integer, not null, foreign key | References `events.id`; required relationship. |
-| `name` | `varchar(255)`, not null | Trimmed attendee name. |
-| `email` | `varchar(255)`, not null | Trimmed and lowercased before validation and persistence. |
-| `created_at`, `updated_at` | framework timestamps | `created_at` is the displayed registration time. |
+| Column                     | Database definition                         | Application contract                                      |
+| -------------------------- | ------------------------------------------- | --------------------------------------------------------- |
+| `id`                       | database-generated big integer primary key  | Deterministic ordering tie-breaker.                       |
+| `event_id`                 | unsigned big integer, not null, foreign key | References `events.id`; required relationship.            |
+| `name`                     | `varchar(255)`, not null                    | Trimmed attendee name.                                    |
+| `email`                    | `varchar(255)`, not null                    | Trimmed and lowercased before validation and persistence. |
+| `created_at`, `updated_at` | framework timestamps                        | `created_at` is the displayed registration time.          |
 
 Constraints and indexes:
 
@@ -87,17 +87,17 @@ Factories are required for both models and produce only synthetic data. No dedic
 
 ## HTTP, controller, and Wayfinder contract
 
-| Method and URI | Route name | Controller action | Inertia/redirect behavior |
-| --- | --- | --- | --- |
-| `GET /` | `home` | `App\Http\Controllers\EventController@index` | `events/index`; replaces the starter welcome page while preserving the existing `home` contract. |
-| `GET /events/{event}` | `events.show` | `App\Http\Controllers\EventController@show` | `events/show`; implicit binding gives normal 404. |
-| `POST /events/{event}/registrations` | `events.registrations.store` | `App\Http\Controllers\EventRegistrationController@store` | On success flashes confirmation and redirects to `events.show`; on validation/duplicate failure redirects back with field errors. |
-| `GET /admin/events` | `admin.events.index` | `App\Http\Controllers\Admin\EventController@index` | `admin/events/index`. |
-| `GET /admin/events/create` | `admin.events.create` | `App\Http\Controllers\Admin\EventController@create` | `admin/events/create`. |
-| `POST /admin/events` | `admin.events.store` | `App\Http\Controllers\Admin\EventController@store` | Creates, flashes success toast, redirects to `admin.events.edit`. |
-| `GET /admin/events/{event}/edit` | `admin.events.edit` | `App\Http\Controllers\Admin\EventController@edit` | `admin/events/edit`. |
-| `PATCH /admin/events/{event}` | `admin.events.update` | `App\Http\Controllers\Admin\EventController@update` | Updates only event fields, flashes success toast, redirects to `admin.events.edit`. |
-| `GET /admin/events/{event}/registrations` | `admin.events.registrations.index` | `App\Http\Controllers\Admin\EventRegistrationController@index` | `admin/events/registrations`; registrations ordered by `created_at`, then `id`. |
+| Method and URI                            | Route name                         | Controller action                                              | Inertia/redirect behavior                                                                                                         |
+| ----------------------------------------- | ---------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /`                                   | `home`                             | `App\Http\Controllers\EventController@index`                   | `events/index`; replaces the starter welcome page while preserving the existing `home` contract.                                  |
+| `GET /events/{event}`                     | `events.show`                      | `App\Http\Controllers\EventController@show`                    | `events/show`; implicit binding gives normal 404.                                                                                 |
+| `POST /events/{event}/registrations`      | `events.registrations.store`       | `App\Http\Controllers\EventRegistrationController@store`       | On success flashes confirmation and redirects to `events.show`; on validation/duplicate failure redirects back with field errors. |
+| `GET /admin/events`                       | `admin.events.index`               | `App\Http\Controllers\Admin\EventController@index`             | `admin/events/index`.                                                                                                             |
+| `GET /admin/events/create`                | `admin.events.create`              | `App\Http\Controllers\Admin\EventController@create`            | `admin/events/create`.                                                                                                            |
+| `POST /admin/events`                      | `admin.events.store`               | `App\Http\Controllers\Admin\EventController@store`             | Creates, flashes success toast, redirects to `admin.events.edit`.                                                                 |
+| `GET /admin/events/{event}/edit`          | `admin.events.edit`                | `App\Http\Controllers\Admin\EventController@edit`              | `admin/events/edit`.                                                                                                              |
+| `PATCH /admin/events/{event}`             | `admin.events.update`              | `App\Http\Controllers\Admin\EventController@update`            | Updates only event fields, flashes success toast, redirects to `admin.events.edit`.                                               |
+| `GET /admin/events/{event}/registrations` | `admin.events.registrations.index` | `App\Http\Controllers\Admin\EventRegistrationController@index` | `admin/events/registrations`; registrations ordered by `created_at`, then `id`.                                                   |
 
 Routes are explicit because the exposed resource subset is small and there is intentionally no event `destroy` or public API action. Admin routes sit outside authentication middleware. Static `/create` routes must be declared before routes containing `{event}`.
 
@@ -109,13 +109,13 @@ Wayfinder remains generated by the installed Vite plugin with form variants enab
 
 One `App\Http\Requests\Admin\SaveEventRequest` is used by both create and update because the allowed fields and rules are identical. `prepareForValidation()` trims `title`, `description`, and `location` without collapsing meaningful internal whitespace.
 
-| Field | Rules |
-| --- | --- |
-| `title` | `required`, `string`, `max:255` |
-| `description` | `required`, `string` |
-| `location` | `required`, `string`, `max:255` |
-| `starts_at` | `required`, exact `date_format:Y-m-d\TH:i` |
-| `ends_at` | `required`, exact `date_format:Y-m-d\TH:i`, strictly `after:starts_at` |
+| Field         | Rules                                                                  |
+| ------------- | ---------------------------------------------------------------------- |
+| `title`       | `required`, `string`, `max:255`                                        |
+| `description` | `required`, `string`                                                   |
+| `location`    | `required`, `string`, `max:255`                                        |
+| `starts_at`   | `required`, exact `date_format:Y-m-d\TH:i`                             |
+| `ends_at`     | `required`, exact `date_format:Y-m-d\TH:i`, strictly `after:starts_at` |
 
 After validation, the controller parses both `datetime-local` values in `config('app.timezone')`, verifies the exact local format, converts them to UTC, and passes only the validated fields to `Event::create()` or `update()`. The configured timezone is supplied to every relevant page and shown visibly. The current configured timezone is `UTC`.
 
@@ -160,7 +160,7 @@ type EventDetail = EventSummary & {
 
 type EventEditData = EventDetail & {
     startsAtLocal: string; // Y-m-dTHH:mm in app timezone
-    endsAtLocal: string;   // Y-m-dTHH:mm in app timezone
+    endsAtLocal: string; // Y-m-dTHH:mm in app timezone
 };
 
 type AdminRegistration = {
@@ -176,14 +176,14 @@ type RegistrationConfirmation = {
 };
 ```
 
-| Page | Exact page props |
-| --- | --- |
-| `events/index` | `{ events: EventSummary[]; timezone: string }` |
-| `events/show` | `{ event: EventDetail; timezone: string }` |
-| `admin/events/index` | `{ events: EventSummary[]; timezone: string }` |
-| `admin/events/create` | `{ timezone: string }` |
-| `admin/events/edit` | `{ event: EventEditData; timezone: string }` |
-| `admin/events/registrations` | `{ event: Pick<EventSummary, 'id' | 'title'>; registrations: AdminRegistration[]; timezone: string }` |
+| Page                         | Exact page props                               |
+| ---------------------------- | ---------------------------------------------- |
+| `events/index`               | `{ events: EventSummary[]; timezone: string }` |
+| `events/show`                | `{ event: EventDetail; timezone: string }`     |
+| `admin/events/index`         | `{ events: EventSummary[]; timezone: string }` |
+| `admin/events/create`        | `{ timezone: string }`                         |
+| `admin/events/edit`          | `{ event: EventEditData; timezone: string }`   |
+| `admin/events/registrations` | `{ event: Pick<EventSummary, 'id'              | 'title'>; registrations: AdminRegistration[]; timezone: string }` |
 
 `events/index` and the admin event list order every event by ascending `starts_at`, then ascending `id`. No pagination or filter prop exists. Empty arrays drive explicit event and registrant empty states.
 
@@ -213,11 +213,11 @@ The existing authenticated `AppLayout` cannot safely host guest pages because it
 
 ## Backend/frontend ownership seam and safe parallelism
 
-| Backend-owned contract | Frontend-owned use |
-| --- | --- |
+| Backend-owned contract                                                                                                                | Frontend-owned use                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Migrations, constraints, models, factories, action, Form Requests, controllers, routes, explicit prop mapping, and focused PHP tests. | Six Inertia pages, `EventsLayout`, feature-specific TypeScript types/components, field/error states, responsive and keyboard behavior. |
-| Generated Wayfinder directories after route/controller changes. | Imports generated names; never writes generated files or hard-codes route contracts. |
-| Prop keys, ISO/local date formats, flash keys, validation error keys, ordering. | Treats this artifact's shapes as fixed; any change routes through Orchestrator and may trigger G2. |
+| Generated Wayfinder directories after route/controller changes.                                                                       | Imports generated names; never writes generated files or hard-codes route contracts.                                                   |
+| Prop keys, ISO/local date formats, flash keys, validation error keys, ordering.                                                       | Treats this artifact's shapes as fixed; any change routes through Orchestrator and may trigger G2.                                     |
 
 After G1, frontend may build page shells and types against these shapes while backend implements persistence/HTTP behavior. Final form and link integration waits for regenerated Wayfinder output. Neither role changes a route, prop, validation, timezone, privacy, or schema contract without Orchestrator reconciliation.
 
@@ -251,39 +251,39 @@ QA also inspects the actual foreign key, named composite unique index, ordering 
 
 ## Acceptance-criterion mapping
 
-| Criterion | Architecture component and required evidence |
-| --- | --- |
-| `EVT-001` | `home` index query ordered `starts_at`, `id`; `EventSummary[]`; feature test and responsive review. |
-| `EVT-002` | Empty `events` array and explicit page empty state; feature test. |
-| `EVT-003` | Route-bound `events.show`, `EventDetail`, registration form; feature test and UI review. |
-| `EVT-004` | Implicit binding; unknown event feature test returns normal 404. |
-| `REG-001` | Labeled required `<Form>` fields, accessible errors, processing submit; UI/accessibility review. |
-| `REG-002` | `StoreRegistrationRequest`, no failed insert, Inertia field errors/state preservation; feature/UI tests. |
-| `REG-003` | Relationship insert, redirect to show, typed one-time confirmation; response/database test. |
-| `REG-004` | Pre-validation normalization, scoped unique rule, composite index, clear `email` error; row-count test. |
-| `REG-005` | Unique key includes `event_id`; two-event feature test. |
+| Criterion | Architecture component and required evidence                                                                                                                           |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EVT-001` | `home` index query ordered `starts_at`, `id`; `EventSummary[]`; feature test and responsive review.                                                                    |
+| `EVT-002` | Empty `events` array and explicit page empty state; feature test.                                                                                                      |
+| `EVT-003` | Route-bound `events.show`, `EventDetail`, registration form; feature test and UI review.                                                                               |
+| `EVT-004` | Implicit binding; unknown event feature test returns normal 404.                                                                                                       |
+| `REG-001` | Labeled required `<Form>` fields, accessible errors, processing submit; UI/accessibility review.                                                                       |
+| `REG-002` | `StoreRegistrationRequest`, no failed insert, Inertia field errors/state preservation; feature/UI tests.                                                               |
+| `REG-003` | Relationship insert, redirect to show, typed one-time confirmation; response/database test.                                                                            |
+| `REG-004` | Pre-validation normalization, scoped unique rule, composite index, clear `email` error; row-count test.                                                                |
+| `REG-005` | Unique key includes `event_id`; two-event feature test.                                                                                                                |
 | `REG-006` | Named database unique index plus `UniqueConstraintViolationException` conversion in action; schema/direct-action evidence and optional deterministic concurrency test. |
-| `ADM-001` | Admin route group outside auth middleware; guest feature tests for every page/action. |
-| `ADM-002` | `SaveEventRequest`, app-timezone parse, UTC model invariant, success flash/redirect; database test and UI review. |
-| `ADM-003` | Required/exact-format/strict-after rules shared by create/update; unchanged-database and field-error tests. |
-| `ADM-004` | Bound Event update of event fields only; relationship untouched; feature test and success feedback. |
-| `ADM-005` | Admin-only explicit PII prop, `created_at`/`id` ordering, empty state; feature/UI/privacy review. |
-| `QUA-001` | Generated Wayfinder route/action imports and Inertia navigation/forms; code review and TS check. |
-| `QUA-002` | Focused Pest, `npm run check`, `npm run types:check`, and `npm run build` all recorded by QA. |
-| `QUA-003` | No dependency/scope expansion; diff, dependency, route, and acceptance trace review. |
+| `ADM-001` | Admin route group outside auth middleware; guest feature tests for every page/action.                                                                                  |
+| `ADM-002` | `SaveEventRequest`, app-timezone parse, UTC model invariant, success flash/redirect; database test and UI review.                                                      |
+| `ADM-003` | Required/exact-format/strict-after rules shared by create/update; unchanged-database and field-error tests.                                                            |
+| `ADM-004` | Bound Event update of event fields only; relationship untouched; feature test and success feedback.                                                                    |
+| `ADM-005` | Admin-only explicit PII prop, `created_at`/`id` ordering, empty state; feature/UI/privacy review.                                                                      |
+| `QUA-001` | Generated Wayfinder route/action imports and Inertia navigation/forms; code review and TS check.                                                                       |
+| `QUA-002` | Focused Pest, `npm run check`, `npm run types:check`, and `npm run build` all recorded by QA.                                                                          |
+| `QUA-003` | No dependency/scope expansion; diff, dependency, route, and acceptance trace review.                                                                                   |
 
 ## Decisions, alternatives, reversibility, and risks
 
-| Decision / risk | Choice and rationale | Alternative rejected or residual risk |
-| --- | --- | --- |
-| Event deletion | Restrictive foreign key; no delete route. | Cascade could erase PII without an approved retention decision. Future change is G2. |
-| Duplicate race | Friendly scoped validation plus named database unique index and targeted exception conversion. | Validation alone races; cache/database locks add failure modes and are unnecessary for one insert. |
-| Confirmation | One-time Inertia flash plus redirect to event details. | Dedicated confirmation records/tokens add schema and URL exposure; redirect query data risks PII. |
-| UTC handling | Exact local input, explicit timezone parse, UTC-at-rest model accessors, UTC ISO wire values, explicit browser timezone formatting. | Browser-local parsing and ordinary date casts can shift instants when app timezone is not UTC. Current `UTC` has no DST ambiguity; a future timezone change needs focused tests for DST transitions. |
-| PII serialization/logging | Explicit prop maps, hidden email, no logging, masked database bindings. | Admin remains deliberately public. Infrastructure restrictions are deployment-owned and do not make the application authenticated. |
-| Abstraction level | Two models, four controllers, two Form Requests, one focused action, six pages, one guest-safe layout. | Repositories/services/API resources/events/queues are unnecessary for this slice. |
-| Schema portability | Conventional `datetime`, foreign key, and named indexes supported by configured Laravel SQL drivers. | SQLite cannot by itself prove all production-driver concurrency behavior; schema and targeted exception tests remain mandatory. |
-| Rollback | Fresh migrations have honest `down()` order. | Dropping populated tables is destructive; shared-environment rollback requires G2/backup/authorization. |
+| Decision / risk           | Choice and rationale                                                                                                                | Alternative rejected or residual risk                                                                                                                                                                |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Event deletion            | Restrictive foreign key; no delete route.                                                                                           | Cascade could erase PII without an approved retention decision. Future change is G2.                                                                                                                 |
+| Duplicate race            | Friendly scoped validation plus named database unique index and targeted exception conversion.                                      | Validation alone races; cache/database locks add failure modes and are unnecessary for one insert.                                                                                                   |
+| Confirmation              | One-time Inertia flash plus redirect to event details.                                                                              | Dedicated confirmation records/tokens add schema and URL exposure; redirect query data risks PII.                                                                                                    |
+| UTC handling              | Exact local input, explicit timezone parse, UTC-at-rest model accessors, UTC ISO wire values, explicit browser timezone formatting. | Browser-local parsing and ordinary date casts can shift instants when app timezone is not UTC. Current `UTC` has no DST ambiguity; a future timezone change needs focused tests for DST transitions. |
+| PII serialization/logging | Explicit prop maps, hidden email, no logging, masked database bindings.                                                             | Admin remains deliberately public. Infrastructure restrictions are deployment-owned and do not make the application authenticated.                                                                   |
+| Abstraction level         | Two models, four controllers, two Form Requests, one focused action, six pages, one guest-safe layout.                              | Repositories/services/API resources/events/queues are unnecessary for this slice.                                                                                                                    |
+| Schema portability        | Conventional `datetime`, foreign key, and named indexes supported by configured Laravel SQL drivers.                                | SQLite cannot by itself prove all production-driver concurrency behavior; schema and targeted exception tests remain mandatory.                                                                      |
+| Rollback                  | Fresh migrations have honest `down()` order.                                                                                        | Dropping populated tables is destructive; shared-environment rollback requires G2/backup/authorization.                                                                                              |
 
 No requirement ambiguity blocks G1. Human G1 must explicitly approve the new schema/route/prop contracts and accept (1) the POC-only unauthenticated admin exposure and (2) the limitation that deterministic SQLite tests may validate the constraint and loser path without generating genuinely simultaneous requests. Approval should also include the required database-binding masking configuration path. Implementation, merge, and deployment remain blocked until their respective gates.
 
