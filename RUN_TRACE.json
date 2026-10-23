@@ -1,5 +1,118 @@
 {
     "$schema": "./RUN_TRACE.schema.json",
     "schema_version": "1.0.0",
-    "runs": []
+    "runs": [
+        {
+            "run_id": "events-vslice-20261023-001",
+            "parent_run_id": null,
+            "objective": "Plan and architect the approved events application thin vertical slice before implementation.",
+            "status": "running",
+            "started_at": "2026-10-23T09:36:41Z",
+            "ended_at": null,
+            "elapsed_ms": null,
+            "repository_commit": "869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf",
+            "working_tree_dirty": false,
+            "acceptance_criteria": [],
+            "child_run_ids": [],
+            "agents": [
+                {
+                    "agent": "system-orchestrator",
+                    "role": "System Orchestrator",
+                    "model": null,
+                    "charter_sha256": null,
+                    "status": "completed",
+                    "started_at": "2026-10-23T09:36:41Z",
+                    "ended_at": "2026-10-23T09:36:55Z",
+                    "elapsed_ms": 14000,
+                    "acceptance_criteria": [],
+                    "prompt_summary": "Record Erickson Salangsang's G0 approval for the committed governance baseline and initialize the governed run without authorizing application implementation.",
+                    "input_artifacts": [
+                        {
+                            "path": "EVENT_SPEC.md",
+                            "sha256": null
+                        },
+                        {
+                            "path": "AGENTS.md",
+                            "sha256": null
+                        },
+                        {
+                            "path": "HUMAN_GATES_AND_GUARDRAILS.md",
+                            "sha256": null
+                        },
+                        {
+                            "path": "WORKFLOW_DESIGN.md",
+                            "sha256": null
+                        },
+                        {
+                            "path": "WORKFLOW_DIAGRAM.md",
+                            "sha256": null
+                        },
+                        {
+                            "path": "artifacts/README.md",
+                            "sha256": null
+                        }
+                    ],
+                    "output_artifacts": [
+                        {
+                            "path": "artifacts/DECISION_LOG.md",
+                            "sha256": "36ae2b5062ea7f10cca32d00337af3cb98fb873530ac3ccfd4eec34bb5f319a2"
+                        },
+                        {
+                            "path": "RUN_TRACE.json",
+                            "sha256": null
+                        }
+                    ],
+                    "decisions": [
+                        "G0 was approved by Erickson Salangsang for governance baseline commit 869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf.",
+                        "Planning and architecture are authorized; Backend and Frontend implementation remain blocked until G1 approval."
+                    ],
+                    "tool_calls": [
+                        {
+                            "tool": "apply_patch",
+                            "action_summary": "Created the persistent G0 decision record and initialized the governed run trace.",
+                            "status": "succeeded",
+                            "started_at": "2026-10-23T09:36:41Z",
+                            "ended_at": "2026-10-23T09:36:55Z"
+                        }
+                    ],
+                    "errors": [],
+                    "retry_count": 0,
+                    "remediation_cycles": 0,
+                    "usage": {
+                        "input_tokens": null,
+                        "output_tokens": null,
+                        "cached_tokens": null,
+                        "total_tokens": null,
+                        "cost": {
+                            "amount": null,
+                            "currency": null,
+                            "source": null,
+                            "unavailable_reason": "The execution environment did not expose billing cost for this agent execution."
+                        },
+                        "unavailable_reason": "The execution environment did not expose token usage for this agent execution."
+                    },
+                    "redactions": [
+                        "Full conversation history was not stored; only the minimum human approval evidence was retained."
+                    ]
+                }
+            ],
+            "gate_decisions": [
+                "G0 approved by Erickson Salangsang on 2026-10-23 for revision 869e7fbe7ddf35d5440aa99a61c8f43f183cc3cf, subject to the conditions and accepted risks in artifacts/DECISION_LOG.md."
+            ],
+            "usage": {
+                "input_tokens": null,
+                "output_tokens": null,
+                "cached_tokens": null,
+                "total_tokens": null,
+                "cost": {
+                    "amount": null,
+                    "currency": null,
+                    "source": null,
+                    "unavailable_reason": "The execution environment did not expose aggregate billing cost for this run."
+                },
+                "unavailable_reason": "The execution environment did not expose aggregate token usage for this run."
+            },
+            "summary": "G0 approval recorded. The governed run is open for Orchestrator planning and Solutions Architect work only; application implementation remains blocked pending G1."
+        }
+    ]
 }
